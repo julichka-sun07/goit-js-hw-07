@@ -15,7 +15,7 @@ function createGalleryMarkup(items) {
       return `
         <li class="gallery__item">
             <a class="gallery__link" href="${original}">
-                <img class="gallery__image" src="${preview}" alt="${description}"/>
+             <img class="gallery__image" src="${preview}" alt="" title="${description}"/>
             </a>
         </li> 
      `;
@@ -28,9 +28,6 @@ function onGalleryItemClick(event) {
     if (target.nodeName !== 'IMG') {
       return;
     } 
-   
-
-
-    // const originalImageUrl = target.closest('.gallery__item').querySelector('.gallery__link').href;
+    var lightbox = new SimpleLightbox('.gallery a', { });
 
 }
