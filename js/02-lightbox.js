@@ -1,33 +1,22 @@
-import { galleryItems } from './gallery-items.js';
+import { galleryItems } from "./gallery-items.js";
 
-const galleryContainer = document.querySelector('.gallery');
+const gallery = document.querySelector(".gallery");
+createGallery(galleryItems);
 
-// Створюємо розмітку галереї
-const galleryMarkup = createGalleryMarkup(galleryItems);
-galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
-
-// Додаємо обробник подій кліку на елементи галереї
-galleryContainer.addEventListener('click', onGalleryItemClick);
-
-function createGalleryMarkup(items) {
-  return items
-    .map(({ preview, original, description }) => {
-      return `
-        <li class="gallery__item">
-            <a class="gallery__link" href="${original}">
-             <img class="gallery__image" src="${preview}" alt="" title="${description}"/>
-            </a>
-        </li> 
-     `;
-    }).join('');
+function createGallery(galleryData) {
+  gallery.innerHTML = galleryData
+    .map(({preview, original, description}) => 
+    `<li class="gallery__item">
+      <a class="gallery__link" href="${original}">
+        <img class="gallery__image" src="${preview}" alt="${description}" />
+      </a>
+    </li>`).join("");
 }
 
-function onGalleryItemClick(event) {
-    event.preventDefault();
-    const { target } = event;
-    if (target.nodeName !== 'IMG') {
-      return;
-    } 
-    var lightbox = new SimpleLightbox('.gallery a', { });
+let boxImage = new SimpleLightbox(".gallery__link", {
+  captions: true,
+  captionsData: "alt",
+  captionDelay: 250,
+});
 
-}
+
